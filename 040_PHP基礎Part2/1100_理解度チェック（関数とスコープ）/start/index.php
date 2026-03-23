@@ -15,6 +15,42 @@
         @param bool $is_absent true:欠席 false:出席
         @return void
 -------------------------------------------------------------
+*/
+// [地力の回答]
+// 出席：$attend
+// 欠席：$abs
+
+function tenko() {
+        $is_absent = true;
+        $is_absent = false;
+
+        if($is_absent > true) {
+                echo "taroは出席しています";
+        } else {
+                echo "taroは欠席しています";
+        }
+        @param string $student;
+        @param boool $is_absent;
+        @return void;
+}
+// -----------------------------------------------------------
+// [AIの回答]
+function tenko($student, $is_absent = false) {
+    if ($is_absent) {
+        // $is_absent が true（欠席）のとき
+        echo $student . "は欠席しています。";
+    } else {
+        // $is_absent が false（出席）のとき
+        echo $student . "は出席しています。";
+    }
+}
+
+// 使い方
+tenko("taro");          // 「taroは出席しています。」（デフォルトが使われる）
+tenko("jiro", true);    // 「jiroは欠席しています。」
+//--------------------------------------------------------------------------
+// [講師の回答]
+
 /** 問２：カウンター関数(counter)
         グローバルスコープに定義された $num に対して、
         引数でわたってきた $step を足し合わせた数値を
@@ -25,3 +61,30 @@
         @param int $step 足し合わせる数値
         @return int 合計値 ($num + $step)
 */
+// --------------------------------------------------------------------------
+// [地力の回答]
+$num = 1;
+$step =1;
+for($num++, 5) {
+        echo $step;
+}
+//----------------------------------------------------------------------------
+// [AIの回答]
+$num = 10; // 最初、外側に置いてある数字
+
+function counter($step = 1) {
+    global $num; // 「外にある $num を使うよ！」という宣言
+    
+    // 今の $num に $step を足して、また $num に入れ直す（上書き）
+    $num = $num + $step;
+    
+    echo $num;   // 画面に出力
+    return $num; // 合計値を返す
+}
+
+// 使い方
+counter();     // 10 + 1 = 11 が出力される
+counter(5);    // 11 + 5 = 16 が出力される
+// ----------------------------------------------------------------------------
+// [講師の回答]
+
