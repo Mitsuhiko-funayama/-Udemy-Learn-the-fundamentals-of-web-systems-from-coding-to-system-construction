@@ -1,5 +1,4 @@
-# 講座名：【Udemy】WEBシステムの基本的な仕組みやその挙動、コーディングからシステム構築までWEBシステムの基礎について徹底的に学びます。Laravelなどのフレームワークを用いた開発を考えている人は是非一度基礎を学んでください。
-### このリポジトリは自分の学習状況を確認するためのリポジトリです。<br>
+# 講座名：【Udemy】【PHP, MYSQL, Apache】ガチで学びたい人のためのWEB開発の基礎(バックエンド編)<br>
 Udemy講座：<https://www.udemy.com/course/backend-tutorial/><br>
 コース内容<br>
   <details open>
