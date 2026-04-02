@@ -1,11 +1,9 @@
 <?php
-/**
- * クラス内のthis
- */
 class Person
 {
     private $name;
     public $age;
+    public static $whereToLive = 'Earth';
 
     function __construct($name, $age)
     {
@@ -13,19 +11,29 @@ class Person
         $this->age = $age;
     }
 
-    function hello() {
+        function hello() {
         echo 'hello, ' . $this->name;
+        echo static::bye();
         return $this;
     }
 
-    function bye() {
-        echo 'bye, ' . $this->name;
-        return $this;
+    /**
+     * staticメソッドとは？
+     *
+     * クラス自体に登録するメソッドである。
+     * 静的なメソッドである。staticメソッド内では「this」は使えない。
+     * 
+     */
+    static function bye() {
+        echo 'bye, ';
     }
 }
 
 $bob = new Person('Bob', 18);
-$bob->hello()->bye();
+// Person::bye(); // 関数byeの呼び出し
+$bob->hello();
+echo Person::$whereToLive;
+// $bob->hello()->bye();
 
 // $tim = new Person('Tim', 32);
 // $tim->hello();
