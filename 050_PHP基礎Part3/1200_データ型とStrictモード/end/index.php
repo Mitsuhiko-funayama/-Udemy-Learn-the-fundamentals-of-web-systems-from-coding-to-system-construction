@@ -12,7 +12,7 @@ require_once 'person.php';
 use animal\Person;
 use animal\Japanese;
 
-function callHelloMethod(Person $person): void {
+function callHelloMethod(Person $person): void { // Personクラスの変数（$person）と指定することで、意図しないエラーを防ぐことができる
     $person->hello();
 }
 
