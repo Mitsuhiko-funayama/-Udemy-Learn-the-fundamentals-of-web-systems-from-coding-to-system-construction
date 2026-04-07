@@ -47,6 +47,12 @@ class MyFileWriter {
     }
 }
 
+class MyFileWriter extends LogWriter
+{
+    function 
+}
+
+
 /**
  * 文字列のフォーマット
  */
