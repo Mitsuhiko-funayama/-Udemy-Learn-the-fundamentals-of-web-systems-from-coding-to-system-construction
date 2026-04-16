@@ -1,0 +1,12 @@
+# 
+# （0300_【htaccess】htaccessを使った設定）
+# この章では、「.htaccess」を実際に作って挙動を確認する！！
+
+# 前提条件として、<Directory "C:\MAMP\htdocs">のAllowOverride All（有効）になっていることが条件。
+# これにより「.htaccess」を使うことができる。
+
+# この下の2行は「.htaccess」のコンテキストの中で、
+# 使用できるディレクトリになる。
+
+DirectoryIndex file1.html
+Options -Indexes
