@@ -9,4 +9,10 @@
 # 使用できるディレクトリになる。
 
 DirectoryIndex file1.html
-Options -Indexes
+# Options -Indexes
+
+# 301は省略可能！ /redirect-testはURLに相当する。
+# Redirectを使った記述の場合には、URLのドメインより後は全て記載する必要がある。
+# 最後の一文の/apacheはリダイレクトの転送先ということになる！
+# ココは外部サイトも指定することができる。
+Redirect 301 /apache/redirect-test /apache

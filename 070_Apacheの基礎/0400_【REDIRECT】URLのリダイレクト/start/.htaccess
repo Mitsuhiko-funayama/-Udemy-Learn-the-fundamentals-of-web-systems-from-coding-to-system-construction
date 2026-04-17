@@ -1,0 +1,26 @@
+# リダイレクト[Redirect]とは？
+# 異なるURLへ転送する。（ブラウザのURL表示も変更される。）
+#
+# コンテキスト:	サーバ設定ファイル, バーチャルホスト, ディレクトリ, .htaccess
+
+# Redirect [status] URL-path URL
+# 
+# HTTPstatus:
+# 下記の2種類のステータスがある。
+# 301 永続的なリダイレクトの設定に使用（301は省略することも可能）
+# 302 一時的に引っ越したことを表す（デフォルト）
+# 
+# - ブラウザの挙動
+# Header のレスポンスヘッダが300番台の場合
+# Locationに指定されたURLへリダイレクト
+# 301は省略可能！ /redirect-testはURLに相当する。
+# Redirectを使った記述の場合には、URLのドメインより後は全て記載する必要がある。
+# 最後の一文の/apacheはリダイレクトの転送先ということになる！
+# ココは外部サイトも指定することができる。
+
+Redirect /apache/redirect-test /apache
+Redirect /apache/redirect-test https://google.com
+
+# Redirectループに注意：Redirectの処理は前方一致で判定されているため、
+# 前方の部分「/apache/dir-test」のURL部分に何度もリダイレクト処理が掛かってしまう。
+Redirect /apache/dir-test /apache/dir-test/sub1
