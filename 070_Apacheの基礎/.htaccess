@@ -15,4 +15,11 @@ DirectoryIndex file1.html
 # Redirectを使った記述の場合には、URLのドメインより後は全て記載する必要がある。
 # 最後の一文の/apacheはリダイレクトの転送先ということになる！
 # ココは外部サイトも指定することができる。
-Redirect 301 /apache/redirect-test /apache
+# Redirect 301 /apache/redirect-test /apache
+
+# 以下の301、302でどの様な違いが出てくるのか確認する
+# 302、一時的なリダイレクトの処理
+# Redirect 302 /apache/file1 /apache/dir-test/file2.html
+
+# 301、永続的なリダイレクトの処理
+Redirect 301 /apache/file1 /apache/dir-test/file1.html
