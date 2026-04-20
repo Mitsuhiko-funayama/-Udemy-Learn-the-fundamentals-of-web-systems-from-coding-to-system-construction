@@ -8,7 +8,7 @@
 # この下の2行は「.htaccess」のコンテキストの中で、
 # 使用できるディレクトリになる。
 
-DirectoryIndex file1.html
+# DirectoryIndex file1.html
 # Options -Indexes
 
 # 301は省略可能！ /redirect-testはURLに相当する。
@@ -22,4 +22,14 @@ DirectoryIndex file1.html
 # Redirect 302 /apache/file1 /apache/dir-test/file2.html
 
 # 301、永続的なリダイレクトの処理
-Redirect 301 /apache/file1 /apache/dir-test/file1.html
+# Redirect 301 /apache/file1 /apache/dir-test/file1.html
+
+# 下記の様に記載することで、RewriteRuleを使えるようにした。
+RewriteEngine On
+
+# 
+RewriteRule rewrite-test/index.html /apache/rewrite-test/tmp.html [R]
+# 上記のリダイレクトは単なるリダイレクトではなく、Apacheの内部で行われているので、
+# インターナルリダイレクトと呼ばれる。
+# 一般的なリダイレクトは、ブラウザ-サーバー間で行われるが、このリライトルールは、サーバー内部で疑似的に行っている。
+# 末尾に[R]を付けることで、ブラウザ-サーバー間でやり取りを行う（リダイレクト）が行われる。
