@@ -23,13 +23,27 @@
 
 # 301、永続的なリダイレクトの処理
 # Redirect 301 /apache/file1 /apache/dir-test/file1.html
-
+# -------------------------------------------------------------------------------------------------------------------
+# 【REWRITE】URLの書き換え（Part1）
 # 下記の様に記載することで、RewriteRuleを使えるようにした。
 RewriteEngine On
 
-# 
-RewriteRule rewrite-test/index.html /apache/rewrite-test/tmp.html [R]
+# 下記の記載方法で、index.html->tmp.htmlに転送する作業を行う
+# RewriteRule rewrite-test/index.html /apache/rewrite-test/tmp.html
 # 上記のリダイレクトは単なるリダイレクトではなく、Apacheの内部で行われているので、
 # インターナルリダイレクトと呼ばれる。
-# 一般的なリダイレクトは、ブラウザ-サーバー間で行われるが、このリライトルールは、サーバー内部で疑似的に行っている。
+# 一般的なリダイレクトは、ブラウザ-サーバー間で行われるが、このRewriteRule（リライトルール）は、サーバー内部で疑似的に行っている。
 # 末尾に[R]を付けることで、ブラウザ-サーバー間でやり取りを行う（リダイレクト）が行われる。
+# -----------------------------------------------------------------------------------------------------------------------
+# 【REWRITE】URLの書き換え（Part2）
+# 
+RewriteRule rewrite-test/imgs/150.jpg /apache/rewrite-test/imgs/150.png
+# 
+# ココで注目したいのは、URLはhttp://localhost:8888/apache/rewrite-test/imgs/150.jpgを指定しているが、
+# 検証モードのNetworkタブ/Headersタブ/Response headers/Content-Type/を確認すると、image/pngになっている。
+# これは実際に画像をDLしてみても、
+# 拡張子は「.png」ファイルなのでこれもインターナルリダイレクトのリライトルールということになる。
+
+RewriteRule rewrite-test/sub1/ /apache/rewrite-test/sub2/
+# 次はsub1の内容を他のフォルダにリライトしたい場合をやってみる。
+# ------------------------------------------------------------------------------------------------------------------------
