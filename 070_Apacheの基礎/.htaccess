@@ -28,6 +28,9 @@
 # 下記の様に記載することで、RewriteRuleを使えるようにした。
 RewriteEngine On
 
+RewriteBase /apache/rewrite-test/
+
+
 # 下記の記載方法で、index.html->tmp.htmlに転送する作業を行う
 # RewriteRule rewrite-test/index.html /apache/rewrite-test/tmp.html
 # 上記のリダイレクトは単なるリダイレクトではなく、Apacheの内部で行われているので、
@@ -37,8 +40,10 @@ RewriteEngine On
 # -----------------------------------------------------------------------------------------------------------------------
 # 【REWRITE】URLの書き換え（Part2）
 # 
-RewriteRule rewrite-test/imgs/150.jpg /apache/rewrite-test/imgs/150.png
-# 
+# RewriteRule rewrite-test/imgs/150.jpg /apache/rewrite-test/imgs/150.png
+#上記のURLを正規表現と後方参照を用いて、書き換えてみる
+RewriteRule rewrite-test/imgs/(\d{3}).jpg imgs/$1.png
+
 # ココで注目したいのは、URLはhttp://localhost:8888/apache/rewrite-test/imgs/150.jpgを指定しているが、
 # 検証モードのNetworkタブ/Headersタブ/Response headers/Content-Type/を確認すると、image/pngになっている。
 # これは実際に画像をDLしてみても、
@@ -47,3 +52,7 @@ RewriteRule rewrite-test/imgs/150.jpg /apache/rewrite-test/imgs/150.png
 RewriteRule rewrite-test/sub1/ /apache/rewrite-test/sub2/
 # 次はsub1の内容を他のフォルダにリライトしたい場合をやってみる。
 # ------------------------------------------------------------------------------------------------------------------------
+#【REWRITE】URLの書き換え（Part3）
+#
+RewriteRule rewrite-test/sub1/(.+\.html) sub2/$1
+#
