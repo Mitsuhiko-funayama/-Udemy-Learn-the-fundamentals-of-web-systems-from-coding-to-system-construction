@@ -28,8 +28,8 @@
 # 下記の様に記載することで、RewriteRuleを使えるようにした。
 RewriteEngine On
 
+# 「RewriteBase」は「URLの書き換えをするときの『スタート地点（基準点）』を決める目印」みたいなモノ
 RewriteBase /apache/rewrite-test/
-
 
 # 下記の記載方法で、index.html->tmp.htmlに転送する作業を行う
 # RewriteRule rewrite-test/index.html /apache/rewrite-test/tmp.html
@@ -42,17 +42,27 @@ RewriteBase /apache/rewrite-test/
 # 
 # RewriteRule rewrite-test/imgs/150.jpg /apache/rewrite-test/imgs/150.png
 #上記のURLを正規表現と後方参照を用いて、書き換えてみる
-RewriteRule rewrite-test/imgs/(\d{3}).jpg imgs/$1.png
+# RewriteRule rewrite-test/imgs/(\d{3}).jpg imgs/$1.png
 
 # ココで注目したいのは、URLはhttp://localhost:8888/apache/rewrite-test/imgs/150.jpgを指定しているが、
 # 検証モードのNetworkタブ/Headersタブ/Response headers/Content-Type/を確認すると、image/pngになっている。
 # これは実際に画像をDLしてみても、
 # 拡張子は「.png」ファイルなのでこれもインターナルリダイレクトのリライトルールということになる。
 
-RewriteRule rewrite-test/sub1/ /apache/rewrite-test/sub2/
+# RewriteRule rewrite-test/sub1/ /apache/rewrite-test/sub2/
 # 次はsub1の内容を他のフォルダにリライトしたい場合をやってみる。
 # ------------------------------------------------------------------------------------------------------------------------
 #【REWRITE】URLの書き換え（Part3）
 #
-RewriteRule rewrite-test/sub1/(.+\.html) sub2/$1
+# RewriteRule rewrite-test/sub1/(.+\.html) sub2/$1
+# --------------------------------------------------------------------------------------------------------------------------
+# 【REWRITE】書き換え条件を付与（Part.1）
 #
+# RewriteCondを使って上から順にコマンドを実行する様に並び替えた。（RewriteRule内のコマンドは書き換えていない）
+# 「RewriteCond %{HTTP_HOST} ^localhost」の意味は、「もし（RewriteCond）、相手が言った行き先（%{HTTP_HOST}）が、
+# 『localhost』で始まっていたら（^localhost）、次の命令に従いなさい。」となる。
+RewriteCond %{HTTP_HOST} ^localhost
+# 下記の「.?」は、「?」が0 or 1になるので、何もなくてもマッチングする。[F]はForbiddenの略でページを表示しない、ということになる。
+RewriteRule .? - [F]
+RewriteRule rewrite-test/imgs/(\d{3}).jpg imgs/$1.png
+RewriteRule rewrite-test/sub1/(.+\.html) sub2/$1
