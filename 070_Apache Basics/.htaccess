@@ -61,8 +61,5 @@ RewriteBase /apache/rewrite-test/
 # RewriteCondを使って上から順にコマンドを実行する様に並び替えた。（RewriteRule内のコマンドは書き換えていない）
 # 「RewriteCond %{HTTP_HOST} ^localhost」の意味は、「もし（RewriteCond）、相手が言った行き先（%{HTTP_HOST}）が、
 # 『localhost』で始まっていたら（^localhost）、次の命令に従いなさい。」となる。
-RewriteCond %{HTTP_HOST} ^localhost
-# 下記の「.?」は、「?」が0 or 1になるので、何もなくてもマッチングする。[F]はForbiddenの略でページを表示しない、ということになる。
-RewriteRule .? - [F]
-RewriteRule rewrite-test/imgs/(\d{3}).jpg imgs/$1.png
-RewriteRule rewrite-test/sub1/(.+\.html) sub2/$1
+RewriteCond %{QUERY_STRING} P=(.+)
+RewriteRule rewrite-test/sub1 sub1/%1
